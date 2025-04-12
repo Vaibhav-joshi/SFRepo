@@ -55,4 +55,4 @@ jobs:
             run: |
                 cp ./SF/sfdx-project.json changed-sources/SF
                 ls -a changed-sources/SF 
-                sf project deploy validate --source-dir changed-sources/SF --target-org vaibhav.admin@dev.com
+                sf project deploy validate --source-dir changed-sources --target-org vaibhav.admin@dev.com
