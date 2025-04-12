@@ -44,7 +44,7 @@ jobs:
             run: |
                 git fetch --all
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir .
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./..
                 sfdx plugins
                 ls -aR changed-sources
 
@@ -56,5 +56,5 @@ jobs:
 
         -   name: Validate delta sf package
             run: |
-                ls -a changed-sources
+                ls -aR changed-sources
                 sf project deploy validate --source-dir changed-sources --test-level RunLocalTests
