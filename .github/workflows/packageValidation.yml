@@ -53,6 +53,11 @@ jobs:
 
         -   name: Validate delta sf packages
             run: |
-                cp ./SF/sfdx-project.json changed-sources/SF
-                ls -a changed-sources/SF 
+                cp -R ./SF/* changed-sources/
+
+                # Remove the original directory inside changed-sources if needed
+                rm -rf changed-sources/SF
+
+                # List the contents of changed-sources to verify structure
+                ls -a changed-sources/
                 sf project deploy validate --source-dir changed-sources --target-org vaibhav.admin@dev.com
