@@ -40,7 +40,7 @@ jobs:
         -   name: Generate delta package
             run: |
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir SF/force-app
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
 
 
         -   name: Dev login sf
