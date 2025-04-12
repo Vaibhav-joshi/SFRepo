@@ -43,20 +43,6 @@ jobs:
         -   name: Generate delta package
             run: |
                 git fetch --all
-                BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
-                HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
-                echo "  "
-                echo "=======================Contant of Base start==="
-                git checkout $BASE_SHA
-                ls -R
-                echo "========================Contant of Base end==="
-                echo "  "
-                echo "=========================Contant of Head start==="
-                git checkout $HEAD_SHA
-                ls -R
-                echo "=========================Contant of Head end==="
-                echo "    "
-
                 mkdir changed-sources
                 sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/
                 sfdx plugins
