@@ -59,4 +59,5 @@ jobs:
         -   name: Validate delta sf packages
             run: |
                 ls -aR changed-sources
+                find changed-sources -type f -name "*.json"
                 sf project deploy validate --source-dir changed-sources --test-level RunSpecifiedTests --tests AccountAndDistributorTest
