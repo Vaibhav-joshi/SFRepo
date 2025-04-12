@@ -59,4 +59,4 @@ jobs:
         -   name: Validate delta sf package
             run: |
                 ls -aR changed-sources
-                sf project deploy validate --source-dir changed-sources --test-level RunLocalTests
+                sf project deploy validate --source-dir changed-sources/force-app --test-level RunLocalTests
