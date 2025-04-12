@@ -35,13 +35,14 @@ jobs:
 
         -   name: Install sfdx-git-delta
             run: |
-                sfdx plugins:install sfdx-git-delta
+                echo Y | sfdx plugins:install sfdx-git-delta
+                sfdx plugins --core | grep sfdx-git-delta
                 sfdx plugins
 
         -   name: Generate delta package
             run: |
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
+                sfdx sgd source delta --to HEAD --from HEAD~1 --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
 
 
         -   name: Dev login sf
