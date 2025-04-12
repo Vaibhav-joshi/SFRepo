@@ -58,7 +58,7 @@ jobs:
                 echo "  "
 
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SFProject/force-app
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
                 sfdx plugins
                 ls -aR changed-sources
 
@@ -71,4 +71,4 @@ jobs:
         -   name: Validate delta sf package
             run: |
                 ls -a changed-sources
-                sf project deploy validate --source-dir SFProject/changed-sources/force-app --test-level RunLocalTests
+                sf project deploy validate --source-dir SF/changed-sources/force-app --test-level RunLocalTests
