@@ -1,0 +1,74 @@
+name: Validate Delta package
+description: validate
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  validate-package:
+    runs-on: ubuntu-latest
+    environment: DEV
+
+    steps:
+        -   name: Checkout
+            uses: actions/checkout@v3
+            with:
+                fetch-depth: 0
+
+        -   name: Install Node
+            uses: actions/setup-node@v3
+            with:
+                node-version: 18
+
+        -   name: App npm global binaries to PATH
+            run: |
+                export PATH=$(npm bin --global):$PATH
+                echo "Now Path: $PATH"
+
+        -   name: Install Salesforce CLI
+            run: |
+                echo "[INFO] Installing Salesforce CLI..."
+                npm install --global @salesforce/cli
+                echo "[INFO] Salesforce CLI installed successfully."
+
+        -   name: Install sfdx-git-delta
+            run: |
+                echo Y | sfdx plugins:install sfdx-git-delta
+                sfdx plugins
+
+        -   name: Generate delta package
+            run: |
+                git fetch --all
+                BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
+                HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
+                echo "  "
+                echo "=======================Contant of Base start==="
+                git checkout $BASE_SHA
+                ls -R
+                echo "========================Contant of Base end==="
+                echo "  "
+                echo "=========================Contant of Head start==="
+                git checkout $HEAD_SHA
+                ls -R
+                echo "=========================Contant of Head end==="
+                echo "    "
+
+                mkdir changed-sources
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
+                sfdx plugins
+                ls -aR changed-sources
+
+        -   name: Dev login
+            run: |
+                echo "${{secrets.SERVER_KEY}}" >server.key
+                sf org login jwt --username ${{secrets.USER_NAME}} --jwt-key-file server.key  --client-id ${{secrets.CONSUMER_KEY}}  --instance-url  ${{vars.DEV_URL}}  --set-default
+                rm -f server.key
+
+        -   name: Validate delta sf package
+            run: |
+                ls -a changed-sources
+                sf project deploy validate --source-dir SF/changed-sources/force-app --test-level RunLocalTests
