@@ -60,4 +60,4 @@ jobs:
             run: |
                 ls -aR changed-sources
                 ls -aR changed-sources/force-app/main/default
-                sf project deploy validate --source-dir changed-sources --test-level NoTestRun
+                sf project deploy validate --source-dir changed-sources --test-level RunSpecifiedTests  --tests AccountAndDistributorTest
