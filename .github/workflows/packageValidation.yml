@@ -44,8 +44,9 @@ jobs:
             run: |
                 git fetch --all
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
                 sfdx plugins
+                cp ./SF/sfdx-project.json changed-sources/
                 ls -aR changed-sources
 
         -   name: Dev login
