@@ -50,7 +50,7 @@ jobs:
                 rm -rf changed-sources/SF
                 cp ./SF/sfdx-project.json changed-sources/
 
-        -   name: Dev login
+        -   name: Dev login sf
             run: |
                 echo "${{secrets.SERVER_KEY}}" >server.key
                 sf org login jwt --username ${{secrets.USER_NAME}} --jwt-key-file server.key  --client-id ${{secrets.CONSUMER_KEY}}  --instance-url  ${{vars.DEV_URL}}  --set-default
