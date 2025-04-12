@@ -44,7 +44,7 @@ jobs:
             run: |
                 git fetch --all
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ../
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir .
                 sfdx plugins
                 ls -aR changed-sources
 
