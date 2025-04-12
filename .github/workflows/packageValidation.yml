@@ -48,7 +48,7 @@ jobs:
                 sfdx plugins
                 mv changed-sources/SF/force-app changed-sources/force-app
                 rm -rf changed-sources/SF
-                cp ./CICDProject/sfdx-project.json changed-sources/
+                cp ./SF/sfdx-project.json changed-sources/
 
         -   name: Dev login
             run: |
