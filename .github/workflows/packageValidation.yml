@@ -55,7 +55,7 @@ jobs:
                 git checkout $HEAD_SHA
                 ls -R
                 echo "=========================Contant of Head end==="
-                echo "  "
+                echo "    "
 
                 mkdir changed-sources
                 sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
