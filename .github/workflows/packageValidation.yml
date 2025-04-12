@@ -60,4 +60,4 @@ jobs:
                 ls -aR changed-sources
                 echo "find======"
                 find changed-sources -type f -name "*.json"
-                sf project deploy validate --source-dir changed-sources
+                sf project deploy validate --source-dir changed-sources --target-org vaibhav.admin@dev.com
