@@ -4,6 +4,7 @@ public class AccountAndDistributorTest {
   static void makeData() {
     ApexTestUtil.createDistributors(5);
     ApexTestUtil.createAccounts(5);
+    system.debug('test');
   }
   @isTest
   static void checkDistributorOptionCrations() {
