@@ -53,4 +53,5 @@ jobs:
 
         -   name: Validate delta sf packages
             run: |
+                ls -a changed-sources/SF
                 sf project deploy validate --source-dir changed-sources/SF --target-org vaibhav.admin@dev.com
