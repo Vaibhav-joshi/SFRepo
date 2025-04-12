@@ -46,11 +46,7 @@ jobs:
                 mkdir changed-sources
                 sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF
                 mv changed-sources/SF/force-app changed-sources/force-app
-                cp -R ./SF/force-app/main/default/profiles changed-sources/force-app/main/default/ || true
-                cp -R ./SF/force-app/main/default/permissions changed-sources/force-app/main/default/ || true
-
                 cp ./SF/sfdx-project.json changed-sources/
-                rm -rf changed-sources/SF
 
 
         -   name: Dev login sf
