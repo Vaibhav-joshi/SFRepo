@@ -36,6 +36,7 @@ jobs:
         -   name: Install sfdx-git-delta
             run: |
                 sfdx plugins:install sfdx-git-delta
+                sfdx plugins
 
         -   name: Generate delta package
             run: |
