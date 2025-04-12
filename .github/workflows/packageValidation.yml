@@ -46,8 +46,9 @@ jobs:
                 mkdir changed-sources
                 sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF/force-app
                 sfdx plugins
-                cp ./SF/sfdx-project.json changed-sources/
-                ls -aR changed-sources
+                mv changed-sources/SF/force-app changed-sources/force-app
+                rm -rf changed-sources/SF
+                cp ./CICDProject/sfdx-project.json changed-sources/
 
         -   name: Dev login
             run: |
