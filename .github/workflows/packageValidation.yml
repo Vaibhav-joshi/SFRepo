@@ -31,22 +31,16 @@ jobs:
 
         -   name: Install Salesforce CLI
             run: |
-                echo "[INFO] Installing Salesforce CLI..."
                 npm install --global @salesforce/cli
-                echo "[INFO] Salesforce CLI installed successfully."
 
         -   name: Install sfdx-git-delta
             run: |
-                echo Y | sfdx plugins:install sfdx-git-delta
-                sfdx plugins
+                sfdx plugins:install sfdx-git-delta
 
         -   name: Generate delta package
             run: |
-                git fetch --all
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir ./SF
-                # mv changed-sources/SF/force-app changed-sources/force-app
-                cp ./SF/sfdx-project.json changed-sources/
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources --generate-delta --source-dir SF/force-app
 
 
         -   name: Dev login sf
@@ -57,7 +51,4 @@ jobs:
 
         -   name: Validate delta sf packages
             run: |
-                ls -aR changed-sources
-                echo "find======"
-                find changed-sources -type f -name "*.json"
-                sf project deploy validate --source-dir changed-sources/SF --target-org vaibhav.admin@dev.com
+                sf project deploy validate --source-dir changed-sources --target-org vaibhav.admin@dev.com
